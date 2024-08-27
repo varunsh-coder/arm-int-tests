@@ -1,4 +1,4 @@
-name: Agent Capability Tests
+name: Agent Capability Tests - ARM
 
 on: 
   workflow_dispatch:
@@ -8,7 +8,7 @@ jobs:
     runs-on: ARMLinuxRunner
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@int-sh
+        uses: step-security/harden-runner@rc
         with:
           egress-policy: audit
           allowed-endpoints: >
@@ -36,9 +36,9 @@ jobs:
     runs-on: ARMLinuxRunner
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@int-sh
+        uses: step-security/harden-runner@rc
         with:
-          egress-policy: audit
+          egress-policy: block
           allowed-endpoints: >
             archive.ubuntu.com:80
             github.com:443
@@ -88,7 +88,7 @@ jobs:
     runs-on: ARMLinuxRunner
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@int-sh
+        uses: step-security/harden-runner@rc
         with:
           egress-policy: audit
           allowed-endpoints: >
@@ -137,9 +137,9 @@ jobs:
     runs-on: ARMLinuxRunner
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@int-sh
+        uses: step-security/harden-runner@rc
         with:
-          egress-policy: audit
+          egress-policy: block
           allowed-endpoints: >
             archive.ubuntu.com:80
             auth.docker.io:443
