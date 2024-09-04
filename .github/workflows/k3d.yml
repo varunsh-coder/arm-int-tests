@@ -51,7 +51,8 @@ jobs:
         echo "POD_NAME=${POD_NAME}"
         echo "::set-output name=podname::${POD_NAME}"
 
-    - name: Stream curl-sidecar logs with timeout
+    - name: Check /etc/resolv.conf in curl-sidecar container
       run: |
-        timeout 30s kubectl logs -f ${{ steps.getpod.outputs.podname }} -c curl-sidecar
+        kubectl exec -it ${{ steps.getpod.outputs.podname }} -c curl-sidecar -- cat /etc/resolv.conf
 
+    
