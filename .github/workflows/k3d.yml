@@ -32,10 +32,12 @@ jobs:
       run: kubectl get nodes
 
     # Apply your Kubernetes deployment
+    # Apply your Kubernetes deployment
     - name: Deploy app to local k8s cluster
       run: |
         kubectl apply -f k8s/deployment.yml  # Ensure your deployment YAML is in the k8s folder
-        kubectl rollout status deployment/your-deployment-name
+        kubectl rollout status deployment/nginx-deployment  # Use the correct deployment name
+
 
     # Check pods using containerd runtime
     - name: Check pods running in containerd
