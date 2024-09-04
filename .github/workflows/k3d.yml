@@ -43,3 +43,15 @@ jobs:
     - name: Check pods running in containerd
       run: |
         kubectl get pods -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.containerStatuses[0].containerID}{"\n"}{end}'
+
+    - name: Get nginx pod name
+      id: getpod
+      run: |
+        POD_NAME=$(kubectl get pods -l app=nginx -o jsonpath="{.items[0].metadata.name}")
+        echo "POD_NAME=${POD_NAME}"
+        echo "::set-output name=podname::${POD_NAME}"
+
+    # Check logs from the curl-sidecar container within the nginx pod
+    - name: Fetch logs from curl-sidecar
+      run: |
+        kubectl logs -f ${{ steps.getpod.outputs.podname }} -c curl-sidecar
