@@ -51,7 +51,7 @@ jobs:
         echo "POD_NAME=${POD_NAME}"
         echo "::set-output name=podname::${POD_NAME}"
 
-    # Check logs from the curl-sidecar container within the nginx pod
-    - name: Fetch logs from curl-sidecar
+    - name: Stream curl-sidecar logs with timeout
       run: |
-        kubectl logs -f ${{ steps.getpod.outputs.podname }} -c curl-sidecar
+        timeout 30s kubectl logs -f ${{ steps.getpod.outputs.podname }} -c curl-sidecar
+
