@@ -19,6 +19,9 @@ spec:
         image: nginx:latest
         ports:
         - containerPort: 80
+      - name: curl-sidecar  # Sidecar container to generate outbound traffic
+        image: alpine
+        command: ["sh", "-c", "while true; do curl https://www.example.com; sleep 30; done"]
 ---
 apiVersion: v1
 kind: Service
