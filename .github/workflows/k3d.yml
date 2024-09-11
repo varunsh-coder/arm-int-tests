@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - name: Harden Runner
-      uses: step-security/harden-runner@int-sh
+      uses: step-security/harden-runner@rc
       with:
         egress-policy: block
         allowed-endpoints: >
