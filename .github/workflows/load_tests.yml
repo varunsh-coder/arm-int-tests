@@ -51,7 +51,8 @@ jobs:
       - run: cat /etc/resolv.conf
       - run: cat /run/systemd/resolve/resolv.conf
       - run: sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
-
+      - run: sleep 2
+      - run: cat /etc/resolv.conf
       
       - name: Checkout code
         uses: actions/checkout@v3
