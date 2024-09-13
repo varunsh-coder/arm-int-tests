@@ -35,7 +35,7 @@ jobs:
           done
   
   test-docker-outbound:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@int-sh
