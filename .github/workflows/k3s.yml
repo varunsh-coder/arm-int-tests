@@ -16,7 +16,7 @@ jobs:
         run: |
           sudo rm -f /etc/resolv.conf
           echo "nameserver 172.17.0.1" | sudo tee /etc/resolv.conf
-    
+      - run: cat /etc/resolv.conf
       - uses: chainguard-dev/actions/setup-k3d@main
         with:
           # Image to use for k3s. This also inherently sets the k3s version.
@@ -63,7 +63,7 @@ jobs:
 
       - name: Check pod logs
         run: kubectl logs test-pod
-
+      - run: cat /etc/resolv.conf
       - name: Get Kubernetes events
         run: kubectl get events --all-namespaces
 
