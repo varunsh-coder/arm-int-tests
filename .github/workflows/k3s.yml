@@ -67,7 +67,19 @@ jobs:
       - name: Get Kubernetes events
         run: kubectl get events --all-namespaces
 
-      - name: Print k3s logs
+      - name: Print k3s server logs
         run: |
-          echo "==== k3s Service Logs (Last 100 Lines) ===="
-          sudo journalctl -u k3s --no-pager -n 100
+          echo "==== k3s Server Logs ===="
+          SERVER_CONTAINER=$(docker ps --filter "name=k3d-${CLUSTER_NAME}-server-0" --format "{{.Names}}")
+          echo "Server container: $SERVER_CONTAINER"
+          docker logs $SERVER_CONTAINER
+
+      - name: Print k3s agent logs (if any)
+        if: ${{ inputs.worker-count != '0' }}
+        run: |
+          echo "==== k3s Agent Logs ===="
+          AGENT_CONTAINERS=$(docker ps --filter "name=k3d-${CLUSTER_NAME}-agent-" --format "{{.Names}}")
+          for AGENT_CONTAINER in $AGENT_CONTAINERS; do
+            echo "Agent container: $AGENT_CONTAINER"
+            docker logs $AGENT_CONTAINER
+          done
