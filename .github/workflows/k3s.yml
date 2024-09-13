@@ -35,11 +35,7 @@ jobs:
       - name: Verify k3s installation
         run: kubectl get nodes
 
-      - name: Check k3s service status
-        run: |
-          echo "==== k3s Service Status ===="
-          sudo systemctl status k3s --no-pager
-
+     
       - name: Deploy test pod
         run: |
           kubectl apply -f - <<EOF
