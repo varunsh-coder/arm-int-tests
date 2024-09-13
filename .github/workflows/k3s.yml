@@ -1,9 +1,7 @@
 name: k3s Outbound Connectivity Test
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   k3s-test:
