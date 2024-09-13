@@ -18,8 +18,6 @@ jobs:
 
       - run: cat /etc/systemd/resolved.conf
       - run: cat /etc/resolv.conf
-      - run: sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
-      - run: sleep 2
       - run: sudo systemctl daemon-reload && sudo systemctl restart docker
       
       - name: Checkout code
@@ -54,8 +52,6 @@ jobs:
 
       - run: cat /etc/resolv.conf
       - run: cat /run/systemd/resolve/resolv.conf
-      - run: sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
-      - run: sleep 2
       - run: sudo systemctl daemon-reload && sudo systemctl restart docker
       - run: cat /etc/resolv.conf
       
@@ -110,8 +106,6 @@ jobs:
             
 
       - run: cat /etc/resolv.conf
-      - run: sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
-      - run: sleep 2
       - run: sudo systemctl daemon-reload && sudo systemctl restart docker
       
       - name: Checkout code
@@ -162,8 +156,6 @@ jobs:
             
 
       - run: cat /etc/resolv.conf
-      - run: sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
-      - run: sleep 2
       - run: sudo systemctl daemon-reload && sudo systemctl restart docker
       
       - name: Checkout code
