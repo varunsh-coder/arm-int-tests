@@ -18,7 +18,7 @@ jobs:
 
       - run: cat /etc/systemd/resolved.conf
       - run: cat /etc/resolv.conf
-      - run: sudo systemctl daemon-reload && sudo systemctl restart docker
+     
       
       - name: Checkout code
         uses: actions/checkout@v3
@@ -35,7 +35,7 @@ jobs:
           done
   
   test-docker-outbound:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@int-sh
@@ -52,9 +52,7 @@ jobs:
 
       - run: cat /etc/resolv.conf
       - run: cat /run/systemd/resolve/resolv.conf
-      - run: sudo systemctl daemon-reload && sudo systemctl restart docker
-      - run: cat /etc/resolv.conf
-      
+    
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -106,7 +104,7 @@ jobs:
             
 
       - run: cat /etc/resolv.conf
-      - run: sudo systemctl daemon-reload && sudo systemctl restart docker
+     
       
       - name: Checkout code
         uses: actions/checkout@v3
@@ -156,7 +154,7 @@ jobs:
             
 
       - run: cat /etc/resolv.conf
-      - run: sudo systemctl daemon-reload && sudo systemctl restart docker
+    
       
       - name: Checkout code
         uses: actions/checkout@v3
