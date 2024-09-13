@@ -1,0 +1,75 @@
+name: k3s Outbound Connectivity Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  k3s-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+          
+      - uses: chainguard-dev/actions/setup-k3d@main
+        with:
+          # Image to use for k3s. This also inherently sets the k3s version.
+          # For example, cgr.dev/chainguard/k3s:latest
+          k3s-image: cgr.dev/chainguard/k3s:latest
+          # The version of k3d to use.
+          k3d-version: 5.5.1
+          # Registry Host is the authority of the local container registry to
+          # stand up for this K3D cluster.
+          # For example, registry.local
+          registry-host: registry.local
+          # Registry port is the port of the registry to expose
+          registry-port: 5000
+          # Registry Mirror is the hostname of a registry mirror to use for DockerHub
+          # to avoid rate-limiting.
+          # For example, mirror.gcr.io.
+          # Required.
+          registry-mirror: mirror.gcr.io
+
+      - name: Verify k3s installation
+        run: kubectl get nodes
+
+      - name: Check k3s service status
+        run: |
+          echo "==== k3s Service Status ===="
+          sudo systemctl status k3s --no-pager
+
+      - name: Deploy test pod
+        run: |
+          kubectl apply -f - <<EOF
+          apiVersion: v1
+          kind: Pod
+          metadata:
+            name: test-pod
+          spec:
+            containers:
+            - name: curl-container
+              image: curlimages/curl:7.85.0
+              command: ["sh", "-c", "sleep infinity"]
+          EOF
+
+      - name: Wait for pod to be ready
+        run: kubectl wait --for=condition=Ready pod/test-pod --timeout=60s
+
+      - name: Verify outbound connectivity
+        run: |
+          kubectl exec test-pod -- curl -I https://www.google.com
+
+      - name: Check pod logs
+        run: kubectl logs test-pod
+
+      - name: Get Kubernetes events
+        run: kubectl get events --all-namespaces
+
+      - name: Print k3s logs
+        run: |
+          echo "==== k3s Service Logs (Last 100 Lines) ===="
+          sudo journalctl -u k3s --no-pager -n 100
