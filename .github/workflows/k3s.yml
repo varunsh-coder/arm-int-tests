@@ -12,7 +12,11 @@ jobs:
         uses: step-security/harden-runner@int-sh
         with:
           egress-policy: audit
-          
+      - name: Update /etc/resolv.conf
+        run: |
+          sudo rm -f /etc/resolv.conf
+          echo "nameserver 172.17.0.1" | sudo tee /etc/resolv.conf
+    
       - uses: chainguard-dev/actions/setup-k3d@main
         with:
           # Image to use for k3s. This also inherently sets the k3s version.
