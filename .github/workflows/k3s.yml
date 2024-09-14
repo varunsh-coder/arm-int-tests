@@ -37,7 +37,8 @@ jobs:
           registry-mirror: mirror.gcr.io
 
       - name: Verify k3s installation
-        run: kubectl get pods
+        run: kubectl get nodes
+      - run: docker ps
 
      
       - name: Deploy test pod
