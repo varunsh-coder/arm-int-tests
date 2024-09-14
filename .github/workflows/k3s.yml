@@ -15,7 +15,7 @@ jobs:
       - name: Update /etc/resolv.conf
         run: |
           sudo rm -f /etc/resolv.conf
-          echo "nameserver 172.17.0.1" | sudo tee /etc/resolv.conf
+          echo "nameserver 168.63.129.16" | sudo tee /etc/resolv.conf
       - run: cat /etc/resolv.conf
       - uses: chainguard-dev/actions/setup-k3d@main
         with:
