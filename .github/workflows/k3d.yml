@@ -69,5 +69,5 @@ jobs:
 
     - name: Print k3s server logs
       run: |
-         docker logs k3d-k3s-my-cluster-server-0
+         docker logs k3d-mycluster-server-0
     
