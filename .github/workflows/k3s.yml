@@ -71,7 +71,7 @@ jobs:
   
           echo "Using k3d config file: "
           cat k3d.yaml
-          k3d cluster create --wait --verbose
+          k3d cluster create mycluster --wait --verbose
           #k3d cluster create --config k3d.yaml --timeout 5m --verbose
   
           # K3d sets this up for us in the node, but we're responsible for the host
