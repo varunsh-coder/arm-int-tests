@@ -30,7 +30,7 @@ jobs:
           apiVersion: k3d.io/v1alpha5
           kind: Simple
           agents: 0
-          image: "rancher/k3s:v1.30.4-k3s1"
+          image: "rancher/k3s:latest"
           registries:
             create:
               name: "registry.local"
