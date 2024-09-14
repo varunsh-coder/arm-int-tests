@@ -71,5 +71,6 @@ jobs:
       run: |
          docker logs k3d-mycluster-server-0
          docker exec k3d-mycluster-server-0 cat /etc/resolv.conf
+         docker inspect k3d-mycluster-server-0 | grep -i networkmode
 
     
