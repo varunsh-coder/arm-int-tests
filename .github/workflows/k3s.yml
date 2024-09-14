@@ -18,7 +18,7 @@ jobs:
           # For example, cgr.dev/chainguard/k3s:latest
           k3s-image: cgr.dev/chainguard/k3s:latest
           # The version of k3d to use.
-          k3d-version: 5.5.1
+          k3d-version: v5.7.4
           # Registry Host is the authority of the local container registry to
           # stand up for this K3D cluster.
           # For example, registry.local
