@@ -70,10 +70,7 @@ jobs:
 
       - name: Print k3s server logs
         run: |
-          echo "==== k3s Server Logs ===="
-          SERVER_CONTAINER=$(docker ps --filter "name=k3d-${CLUSTER_NAME}-server-0" --format "{{.Names}}")
-          echo "Server container: $SERVER_CONTAINER"
-          docker logs $SERVER_CONTAINER
+         docker logs k3d-k3s-default-server-0
 
       - name: Print k3s agent logs (if any)
         if: ${{ inputs.worker-count != '0' }}
