@@ -67,4 +67,7 @@ jobs:
       run: |
         kubectl exec -it ${{ steps.getpod.outputs.podname }} -c curl-sidecar -- cat /etc/resolv.conf
 
+    - name: Print k3s server logs
+      run: |
+         docker logs k3d-k3s-my-cluster-server-0
     
