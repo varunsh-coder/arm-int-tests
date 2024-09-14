@@ -124,9 +124,9 @@ jobs:
       - name: Print k3s server logs
         if: always()
         run: |
-         docker logs k3d-k3s-mycluster-server-0
-         docker exec k3d-k3s-mycluster-server-0 cat /etc/resolv.conf
-         docker inspect k3d-k3s-mycluster-server-0 | grep -i networkmode
+         docker logs k3d-mycluster-server-0
+         docker exec k3d-mycluster-server-0 cat /etc/resolv.conf
+         docker inspect k3d-mycluster-server-0 | grep -i networkmode
 
       - name: Print k3s agent logs (if any)
         if: ${{ inputs.worker-count != '0' }}
