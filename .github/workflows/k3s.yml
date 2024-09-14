@@ -88,6 +88,11 @@ jobs:
       - run: docker ps
 
      
+      - name: Deploy app to local k8s cluster
+        run: |
+          kubectl apply -f k8s/deployment.yml  # Ensure your deployment YAML is in the k8s folder
+          kubectl rollout status deployment/nginx-deployment  # Use the correct deployment name
+          
       - name: Deploy test pod
         run: |
           kubectl apply -f - <<EOF
@@ -118,9 +123,9 @@ jobs:
       - name: Print k3s server logs
         if: always()
         run: |
-         docker logs k3d-k3s-default-server-0
-         docker exec k3d-k3s-default-server-0 cat /etc/resolv.conf
-         docker inspect k3d-k3s-default-server-0 | grep -i networkmode
+         docker logs k3d-k3s-mycluster-server-0
+         docker exec k3d-k3s-mycluster-server-0 cat /etc/resolv.conf
+         docker inspect k3d-k3s-mycluster-server-0 | grep -i networkmode
 
       - name: Print k3s agent logs (if any)
         if: ${{ inputs.worker-count != '0' }}
