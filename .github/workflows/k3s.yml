@@ -34,7 +34,7 @@ jobs:
           apiVersion: k3d.io/v1alpha5
           kind: Simple
           agents: 0
-          image: "rancher/k3s:latest"
+          image: "cgr.dev/chainguard/k3s:latest@sha256:78fe2d04d80c000306a075677b180e3ef857e3116b423daa119c0e63f02d7912"
           registries:
             create:
               name: "registry.local"
