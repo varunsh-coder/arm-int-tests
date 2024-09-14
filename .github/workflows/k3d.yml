@@ -42,7 +42,7 @@ jobs:
     # Verify Kubernetes cluster is up and running
     - name: Verify connection to cluster
       run: kubectl get nodes
-
+    - run: docker ps
     # Apply your Kubernetes deployment
     # Apply your Kubernetes deployment
     - name: Deploy app to local k8s cluster
