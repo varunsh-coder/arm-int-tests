@@ -70,4 +70,6 @@ jobs:
     - name: Print k3s server logs
       run: |
          docker logs k3d-mycluster-server-0
+         docker exec -it k3d-mycluster-server-0 cat /etc/resolv.conf
+
     
