@@ -28,7 +28,7 @@ jobs:
           cat > k3d.yaml <<EOF
           apiVersion: k3d.io/v1alpha5
           kind: Simple
-          agents: "0"
+          agents: 0
           image: "cgr.dev/chainguard/k3s:latest"
           registries:
             create:
