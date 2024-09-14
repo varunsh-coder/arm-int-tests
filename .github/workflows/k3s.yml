@@ -8,9 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: step-security/harden-runner@int-sh
-        with:
-          egress-policy: audit
+     
       - run: cat /etc/resolv.conf
       - uses: chainguard-dev/actions/setup-k3d@main
         with:
