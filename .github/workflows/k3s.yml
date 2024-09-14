@@ -8,6 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@int-sh
+        with:
+          egress-policy: audit
       - name: Checkout repository
         uses: actions/checkout@v3
       - run: cat /etc/resolv.conf
