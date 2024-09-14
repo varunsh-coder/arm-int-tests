@@ -75,21 +75,9 @@ jobs:
           #k3d cluster create --config k3d.yaml --timeout 5m --verbose
   
           # K3d sets this up for us in the node, but we're responsible for the host
-          sudo echo "127.0.0.1 registry.local" | sudo tee -a /etc/hosts
+          #sudo echo "127.0.0.1 registry.local" | sudo tee -a /etc/hosts
   
-      - name: Expose OIDC Discovery
-        shell: bash
-        run: |
-          # From: https://banzaicloud.com/blog/kubernetes-oidc/
-          # To be able to fetch the public keys and validate the JWT tokens against
-          # the Kubernetes cluster's issuer we have to allow external unauthenticated
-          # requests. To do this, we bind this special role with a ClusterRoleBinding
-          # to unauthenticated users (make sure that this is safe in your environment,
-          # but only public keys are visible on this URL)
-          kubectl create clusterrolebinding oidc-reviewer \
-            --clusterrole=system:service-account-issuer-discovery \
-            --group=system:unauthenticated
-  
+     
       - name: Set start time output
         id: start-time
         run: echo "k3d-start-time=$(echo $(($(date +%s%N)/1000000)))" >> $GITHUB_OUTPUT
