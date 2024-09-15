@@ -15,23 +15,7 @@ jobs:
             github.com:443
             goreleaser.com:443
             
-      - name: List and print .network files in /etc/systemd/network
-        run: |
-          if [ -d /etc/systemd/network ]; then
-            echo "Listing .network files in /etc/systemd/network:"
-            ls /etc/systemd/network/*.network || echo "No .network files found."
-
-            echo "Printing contents of .network files:"
-            for file in /etc/systemd/network/*.network; do
-              if [ -f "$file" ]; then
-                echo "Contents of $file:"
-                cat "$file"
-                echo ""
-              fi
-            done
-          else
-            echo "/etc/systemd/network directory does not exist."
-          fi
+      
       - run: resolvectl status
       
       - name: Configure systemd-resolved to use custom DNS servers only
@@ -45,16 +29,7 @@ jobs:
 
       - name: Clear per-link DNS settings
         run: |
-          # Get a list of active network interfaces with their names
-          interfaces=$(resolvectl status | grep '^Link' | awk -F '[()]' '{print $2}')
-
-          # Clear DNS settings for each interface
-          for iface in $interfaces; do
-            echo "Clearing DNS settings for interface $iface"
-            #sudo resolvectl dns $iface ''
-            #sudo resolvectl domain $iface ''
-            sudo resolvectl default-route $iface no
-          done
+          sudo resolvectl default-route eth0 no
           sudo systemctl restart systemd-resolved
       - run: cat /run/systemd/resolve/resolv.conf
       - run: cat /etc/resolv.conf
