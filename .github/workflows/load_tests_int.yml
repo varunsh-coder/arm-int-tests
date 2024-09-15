@@ -15,8 +15,8 @@ jobs:
             github.com:443
             goreleaser.com:443
             
-      - run: cat /etc/systemd/network/eth0.network
-      - run: cat /etc/systemd/network/docker0.network
+      - run: resolvectl status
+      
       - name: Configure systemd-resolved to use custom DNS servers only
         run: |
           sudo mkdir -p /etc/systemd/resolved.conf.d
