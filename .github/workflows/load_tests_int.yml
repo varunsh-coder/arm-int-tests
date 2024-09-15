@@ -19,14 +19,8 @@ jobs:
         run: |
           # Define paths to check
           files=(
-            "/etc/systemd/resolved.conf"
-            "/run/systemd/resolved.conf"
-            "/usr/local/lib/systemd/resolved.conf"
-            "/usr/lib/systemd/resolved.conf"
-            "/etc/systemd/resolved.conf.d/*.conf"
-            "/run/systemd/resolved.conf.d/*.conf"
-            "/usr/local/lib/systemd/resolved.conf.d/*.conf"
-            "/usr/lib/systemd/resolved.conf.d/*.conf"
+            "/etc/NetworkManager/NetworkManager.conf"
+            "/etc/NetworkManager/system-connections/"
           )
 
           # Iterate through paths and print contents if files exist
