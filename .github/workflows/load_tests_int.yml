@@ -26,9 +26,9 @@ jobs:
 
       - name: Clear per-link DNS settings
         run: |
-          # Get a list of active network interfaces
-          interfaces=$(resolvectl status | grep 'Link' | awk '{print $2}')
-          
+          # Get a list of active network interfaces with their names
+          interfaces=$(resolvectl status | grep '^Link' | awk -F '[()]' '{print $2}')
+
           # Clear DNS settings for each interface
           for iface in $interfaces; do
             echo "Clearing DNS settings for interface $iface"
