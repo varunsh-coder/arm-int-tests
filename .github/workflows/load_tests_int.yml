@@ -15,7 +15,17 @@ jobs:
             github.com:443
             goreleaser.com:443
             
-
+      - name: List contents of /etc/systemd/resolved.conf.d
+        run: |
+          if [ -d /etc/systemd/resolved.conf.d ]; then
+            for file in /etc/systemd/resolved.conf.d/*; do
+              echo "Contents of $file:"
+              cat $file
+              echo ""
+            done
+          else
+            echo "Directory /etc/systemd/resolved.conf.d does not exist."
+          fi
       - run: cat /etc/systemd/resolved.conf
       - run: cat /etc/resolv.conf
      
