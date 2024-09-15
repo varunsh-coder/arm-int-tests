@@ -16,6 +16,7 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
           version: 1.64.0
+          args: --accept-routes --accept-dns
       - run: cat /run/systemd/resolve/resolv.conf
       - run: cat /etc/resolv.conf
       - name: Print Tailscale logs
