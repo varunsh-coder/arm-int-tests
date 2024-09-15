@@ -24,12 +24,10 @@ jobs:
           echo "FallbackDNS=" | sudo tee -a /etc/systemd/resolved.conf.d/custom_dns.conf
           sudo systemctl restart systemd-resolved
 
-      - name: Verify DNS settings
-        run: systemd-resolve --status
-
+     
       - name: Test DNS resolution
         run: dig bing.com
-      - run: cat /etc/systemd/resolved.conf
+      - run: cat /run/systemd/resolve/resolv.conf
       - run: cat /etc/resolv.conf
      
       
