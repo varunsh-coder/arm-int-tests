@@ -17,6 +17,15 @@ jobs:
           tags: tag:ci
       - run: cat /run/systemd/resolve/resolv.conf
       - run: cat /etc/resolv.conf
+      - name: Print Tailscale logs
+        run: |
+          echo "Tailscale logs:"
+          sudo tailscale bugreport || echo "Failed to collect Tailscale bugreport."
+          
+      - name: Check Tailscale DNS configuration
+        run: |
+          echo "Tailscale DNS configuration:"
+          sudo tailscale status 
       - name: Resolve domain and print DNS server
         run: |
           DOMAIN="google.com"
