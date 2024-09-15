@@ -41,8 +41,7 @@ jobs:
           sudo systemctl restart systemd-resolved
       - run: cat /run/systemd/resolve/resolv.conf
       - run: cat /etc/resolv.conf
-      - run: cat /etc/systemd/network/eth0.network
-      - run: cat /etc/systemd/network/docker0.network
+      - run: resolvectl status
       
       - name: Checkout code
         uses: actions/checkout@v3
