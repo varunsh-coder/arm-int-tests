@@ -18,22 +18,9 @@ jobs:
       
       - run: resolvectl status
       
-      - name: Configure systemd-resolved to use custom DNS servers only
-        run: |
-          sudo mkdir -p /etc/systemd/resolved.conf.d
-          echo "[Resolve]" | sudo tee /etc/systemd/resolved.conf.d/custom_dns.conf
-          echo "DNS=127.0.0.1 172.17.0.1" | sudo tee -a /etc/systemd/resolved.conf.d/custom_dns.conf
-          echo "Domains=~." | sudo tee -a /etc/systemd/resolved.conf.d/custom_dns.conf
-          echo "FallbackDNS=" | sudo tee -a /etc/systemd/resolved.conf.d/custom_dns.conf
-          sudo systemctl restart systemd-resolved
-
-      - name: Clear per-link DNS settings
-        run: |
-          sudo resolvectl default-route eth0 no
-          sudo systemctl restart systemd-resolved
+     
       - run: cat /run/systemd/resolve/resolv.conf
       - run: cat /etc/resolv.conf
-      - run: resolvectl status
       
       - name: Checkout code
         uses: actions/checkout@v3
