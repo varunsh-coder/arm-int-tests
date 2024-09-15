@@ -32,8 +32,8 @@ jobs:
           # Clear DNS settings for each interface
           for iface in $interfaces; do
             echo "Clearing DNS settings for interface $iface"
-            sudo resolvectl dns $iface ''
-            #sudo resolvectl domain $iface ''
+            #sudo resolvectl dns $iface ''
+            sudo resolvectl domain $iface ''
             #sudo resolvectl default-route $iface no
           done
           sudo systemctl restart systemd-resolved
