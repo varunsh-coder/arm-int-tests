@@ -15,6 +15,23 @@ jobs:
             github.com:443
             goreleaser.com:443
             
+      - name: List and print .network files in /etc/systemd/network
+        run: |
+          if [ -d /etc/systemd/network ]; then
+            echo "Listing .network files in /etc/systemd/network:"
+            ls /etc/systemd/network/*.network || echo "No .network files found."
+
+            echo "Printing contents of .network files:"
+            for file in /etc/systemd/network/*.network; do
+              if [ -f "$file" ]; then
+                echo "Contents of $file:"
+                cat "$file"
+                echo ""
+              fi
+            done
+          else
+            echo "/etc/systemd/network directory does not exist."
+          fi
       - run: resolvectl status
       
       - name: Configure systemd-resolved to use custom DNS servers only
