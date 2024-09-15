@@ -15,17 +15,30 @@ jobs:
             github.com:443
             goreleaser.com:443
             
-      - name: List contents of /etc/systemd/resolved.conf.d
+      - name: Print contents of resolved.conf files and directories
         run: |
-          if [ -d /etc/systemd/resolved.conf.d ]; then
-            for file in /etc/systemd/resolved.conf.d/*; do
+          # Define paths to check
+          files=(
+            "/etc/systemd/resolved.conf"
+            "/run/systemd/resolved.conf"
+            "/usr/local/lib/systemd/resolved.conf"
+            "/usr/lib/systemd/resolved.conf"
+            "/etc/systemd/resolved.conf.d/*.conf"
+            "/run/systemd/resolved.conf.d/*.conf"
+            "/usr/local/lib/systemd/resolved.conf.d/*.conf"
+            "/usr/lib/systemd/resolved.conf.d/*.conf"
+          )
+
+          # Iterate through paths and print contents if files exist
+          for file in "${files[@]}"; do
+            if ls $file 1> /dev/null 2>&1; then
               echo "Contents of $file:"
               cat $file
               echo ""
-            done
-          else
-            echo "Directory /etc/systemd/resolved.conf.d does not exist."
-          fi
+            else
+              echo "$file does not exist or no files found."
+            fi
+          done
       - run: cat /etc/systemd/resolved.conf
       - run: cat /etc/resolv.conf
      
