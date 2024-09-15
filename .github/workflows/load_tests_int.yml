@@ -24,9 +24,19 @@ jobs:
           echo "FallbackDNS=" | sudo tee -a /etc/systemd/resolved.conf.d/custom_dns.conf
           sudo systemctl restart systemd-resolved
 
-     
-      - name: Test DNS resolution
-        run: dig bing.com
+      - name: Clear per-link DNS settings
+        run: |
+          # Get a list of active network interfaces
+          interfaces=$(resolvectl status | grep 'Link' | awk '{print $2}')
+          
+          # Clear DNS settings for each interface
+          for iface in $interfaces; do
+            echo "Clearing DNS settings for interface $iface"
+            sudo resolvectl dns $iface ''
+            sudo resolvectl domain $iface ''
+            sudo resolvectl default-route $iface no
+          done
+          sudo systemctl restart systemd-resolved
       - run: cat /run/systemd/resolve/resolv.conf
       - run: cat /etc/resolv.conf
      
