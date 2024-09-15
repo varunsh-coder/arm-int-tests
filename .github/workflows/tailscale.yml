@@ -17,5 +17,16 @@ jobs:
           tags: tag:ci
       - run: cat /run/systemd/resolve/resolv.conf
       - run: cat /etc/resolv.conf
+      - name: Resolve domain and print DNS server
+        run: |
+          DOMAIN="google.com"
+          echo "Resolving domain: $DOMAIN"
+          # Perform the DNS resolution and extract the server(s) used
+          DIG_OUTPUT=$(dig $DOMAIN +trace +short)
+          # Display the results of the DNS query
+          echo "$DIG_OUTPUT"
+          # Extract and print the DNS server(s) that resolved the query
+          DNS_SERVERS=$(dig $DOMAIN | grep 'SERVER:' | awk '{print $3}')
+          echo "DNS Server(s) used: $DNS_SERVERS"
       - name: Checkout code
         uses: actions/checkout@v3
