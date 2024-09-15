@@ -17,6 +17,7 @@ jobs:
             
       - name: Configure NetworkManager to ignore DHCP DNS
         run: |
+          sudo mkdir -p /etc/NetworkManager/conf.d
           echo -e "[main]\ndns=none\n\n[global-dns]\nrc-manager=symlink\nsystemd-resolved=false\ndns=none\nignore-auto-dns=true" | sudo tee /etc/NetworkManager/conf.d/no-dhcp-dns.conf
           sudo systemctl restart NetworkManager
 
