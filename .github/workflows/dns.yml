@@ -2,7 +2,7 @@ name: DNS Resolution Workflow
 
 on:
   workflow_dispatch:
-
+  
 jobs:
   dns-resolution:
     runs-on: ubuntu-latest
@@ -12,24 +12,24 @@ jobs:
 
       - name: Resolve A Record
         run: |
-          nslookup github.com A || echo "A record resolution failed"
+          nslookup -type=A github.com || echo "A record resolution failed"
 
       - name: Resolve AAAA Record
         run: |
-          nslookup github.com AAAA || echo "AAAA record resolution failed"
+          nslookup -type=AAAA github.com || echo "AAAA record resolution failed"
 
       - name: Resolve CNAME Record
         run: |
-          nslookup github.com CNAME || echo "CNAME record resolution failed"
+          nslookup -type=CNAME github.com || echo "CNAME record resolution failed"
 
       - name: Resolve MX Record
         run: |
-          nslookup github.com MX || echo "MX record resolution failed"
+          nslookup -type=MX github.com || echo "MX record resolution failed"
 
       - name: Resolve TXT Record
         run: |
-          nslookup github.com TXT || echo "TXT record resolution failed"
+          nslookup -type=TXT github.com || echo "TXT record resolution failed"
 
       - name: Resolve NS Record
         run: |
-          nslookup github.com NS || echo "NS record resolution failed"
+          nslookup -type=NS github.com || echo "NS record resolution failed"
