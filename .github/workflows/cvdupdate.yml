@@ -7,7 +7,7 @@ on:
 jobs:
 
   build:
-    runs-on: ARMLinuxRunner
+    runs-on: ubuntu-latest
     #runs-on: [self-hosted, ec2]
     steps:
 
