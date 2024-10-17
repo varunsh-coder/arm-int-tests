@@ -24,7 +24,7 @@ jobs:
       
       - name: Checkout code
         uses: actions/checkout@v3
-      - run: curl www.bing.com
+      - run: curl www.pastebin.com
       - name: Run outbound calls from host
         run: |
           start_time=$(date +%s)
