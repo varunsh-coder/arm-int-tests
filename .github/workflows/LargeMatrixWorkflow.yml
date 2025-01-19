@@ -7,6 +7,7 @@ on:
         description: 'Number of times to print (1000 or 3000)'
         required: true
         default: '1000' # Default value as a string
+  pull_request:
 
 jobs:
   generate-jobs:
@@ -30,7 +31,11 @@ jobs:
       - name: Print large amount of text
         run: |
           echo "This is job number ${{ matrix.job_id }}"
-          print_count="${{ github.event.inputs.print_count }}"
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            print_count=5000
+          else
+            print_count="${{ github.event.inputs.print_count }}"
+          fi
           for i in $(seq 1 "$print_count"); do
             echo "Logging text line $i for job ${{ matrix.job_id }}: $(head -c 100 < /dev/urandom | tr -dc 'A-Za-z0-9');"
           done
