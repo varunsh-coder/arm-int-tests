@@ -73,7 +73,7 @@ jobs:
           
           # Make outbound calls
           for i in {1..9}; do
-            docker exec test-container curl -I https://www.google.com
+            docker exec test-container curl -I https://www.microsoft.com
             docker exec test-container curl -I https://goreleaser.com
             sleep 10  # wait 10 seconds between calls
           done
