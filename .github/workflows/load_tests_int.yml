@@ -17,7 +17,12 @@ jobs:
             
       
       - run: resolvectl status
-      
+      - name: Write Slack Webhook to File
+        run: |
+          echo "https://hooks.slack.com/services/T02FSXXXXX/B03SRXXXXX/nkVKXXXXXXXXXXWV39C8wXX" > webhook.txt
+
+      - name: Print Webhook File Contents
+        run: cat webhook.txt
      
       - run: cat /run/systemd/resolve/resolv.conf
       - run: cat /etc/resolv.conf
